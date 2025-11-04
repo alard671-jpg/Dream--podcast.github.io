@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>تواصل معنا - دريم بودكاست</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header small">
+  <a href="index.html" class="back">العودة للرئيسية</a>
+</header>
+<main class="container">
+  <h2>تواصل معنا</h2>
+  <p>للاتصال السريع: <a href="mailto:dreamfm44@gmail.com?subject=رسالة%20من%20موقع%20دريم%20بودكاست">dreamfm44@gmail.com</a> · <a href="tel:+967771455399">+967771455399</a></p>
+
+  <h3>أرسل لنا رسالة</h3>
+  <form id="contact-form" onsubmit="contactSend(event)">
+    <label>الاسم<input type="text" name="name" required></label>
+    <label>البريد الإلكتروني<input type="email" name="email" required></label>
+    <label>الرسالة<textarea name="message" required></textarea></label>
+    <button type="submit" class="btn">إرسال</button>
+  </form>
+  <p>ملاحظة: النموذج يفتح بريدك الإلكتروني لإرسال الرسالة (يمكن ربطه بخادم لاحقًا).</p>
+</main>
+<footer class="site-footer">
+  <p>© Dream Podcast</p>
+</footer>
+<script>
+function contactSend(e) {{
+  e.preventDefault();
+  const f = e.target;
+  const subject = encodeURIComponent("رسالة من " + f.name.value);
+  const body = encodeURIComponent("الاسم: " + f.name.value + "\nالبريد: " + f.email.value + "\n\n" + f.message.value);
+  window.location.href = "mailto:dreamfm44@gmail.com?subject=" + subject + "&body=" + body;
+}}
+</script>
+</body>
+</html>
