@@ -1,84 +1,153 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dream Podcast - دريم بودكاست</title>
-<link rel="icon" href="images/logo.png">
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="دريم بودكاست - تمكين المرأة في اليمن، 4 برامج أسبوعية، Zeno Radio، SDGs 5,13,16" />
+  <title>دريم بودكاست | Dream Podcast</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json" />
+
+  <!-- SEO -->
+  <meta name="robots" content="index, follow" />
 </head>
-<body>
-<header class="site-header">
-  <div class="brand">
-    <img src="images/logo.png" alt="Dream Podcast logo" class="logo">
-    <div class="titles">
-      <h1>دريم بودكاست</h1>
-      <p class="tagline">Dream Podcast — معنا يتحقق حلمك</p>
-    </div>
+<body class="ar">
+
+<!-- Arabic ticker (text moves like TV) -->
+<div class="ticker ticker-ar" aria-hidden="true">
+  <div class="ticker-content">
+    UNDP تدعم تمكين النساء • WPHF تطلق منح سلام • دريم بودكاست تبث 4 برامج • 237 مستوى نشر • 12,500 مستمع • تاريخ الإطلاق: 1 أغسطس 2025
   </div>
-  <div class="meta">
-    <div id="datetime" class="datetime">--:-- | ----</div>
-    <a class="listen-btn" href="https://zeno.fm/radio/dream-podcast/" target="_blank" title="استمع الآن">
-      <span class="listen-icon">🔊</span> استمع الآن
-    </a>
+</div>
+
+<!-- English ticker -->
+<div class="ticker ticker-en" aria-hidden="true">
+  <div class="ticker-content">
+    UNDP supports women • WPHF launches peace grants • Dream Podcast: 4 weekly shows • Reach: 237 • Launch: Aug 1, 2025
+  </div>
+</div>
+
+<!-- Clock (disappears on scroll) -->
+<div id="clock-widget" aria-live="polite" title="الوقت والتاريخ">
+  <div id="time">--:--:--</div>
+  <div id="date">---</div>
+</div>
+
+<header class="site-header" role="banner">
+  <div class="container header-inner">
+    <div class="brand">
+      <img src="images/logo.png" alt="شعار دريم بودكاست" class="logo" width="140" height="140">
+      <div class="brand-text">
+        <h1 data-en="Dream Podcast">دريم بودكاست</h1>
+        <p data-en="Together we make the dream real">معاً نحقق حلمك</p>
+      </div>
+    </div>
+
+    <div class="cta">
+      <button class="btn" onclick="playLive()" data-en="Listen Live">استمع الآن</button>
+    </div>
   </div>
 </header>
 
-<nav class="main-nav">
-  <a href="index.html">الرئيسية</a>
-  <a href="programs.html">البرامج</a>
-  <a href="news.html">الأخبار</a>
-  <a href="about.html">من نحن</a>
-  <a href="contact.html">تواصل معنا</a>
+<nav class="lang-switch" role="navigation" aria-label="Switch language">
+  <button class="active" data-lang="ar" title="عرض بالعربية">العربية</button>
+  <button data-lang="en" title="View in English">English</button>
 </nav>
 
-<main class="container">
+<main id="main-content" role="main">
   <section class="hero">
-    <h2>صوت التنمية المستدامة والمناخ وحقوق الإنسان والسلام في اليمن</h2>
-    <p>استمع للبث المباشر المجاني ١٠٠٪ عبر Zeno.FM — دريم بودكاست.</p>
-    <div class="player">
-      <iframe src="https://zeno.fm/player/dream-podcast" width="100%" height="160" frameborder="0" scrolling="no" title="Dream Podcast Player"></iframe>
+    <div class="container">
+      <h2 data-en="Dream Podcast Radio Project">مشروع إذاعة دريم بودكاست</h2>
+      <p data-en="Voice of sustainable development, climate and human rights, and peacebuilding in Yemen">
+        صوت التنمية المستدامة والمناخ وحقوق الإنسان وبناء السلام في اليمن
+      </p>
+      <a href="about.html" class="btn" data-en="Read more">اقرأ المزيد</a>
     </div>
   </section>
 
-  <section class="episodes">
-    <h3>آخر الحلقات</h3>
-    <div class="cards" id="episodes-list">
-      <article class="card">
-        <img src="images/logo.png" alt="episode" />
-        <div>
-          <h4>حلقة تجريبية - التنمية المحلية</h4>
-          <p>موجز عن التنمية المحلية وتأثير المشاريع الصغيرة.</p>
-          <a class="btn" href="#">استمع</a>
-        </div>
-      </article>
-      <article class="card">
-        <img src="images/logo.png" alt="episode" />
-        <div>
-          <h4>حلقة المناخ</h4>
-          <p>مناقشة ملفات المناخ والتحديات المحلية.</p>
-          <a class="btn" href="#">استمع</a>
-        </div>
-      </article>
+  <section class="stats">
+    <div class="container">
+      <h2 data-en="Our statistics">إحصائياتنا</h2>
+      <div class="grid">
+        <div class="card"><strong>200+</strong><br><span data-en="Followers">متابع</span></div>
+        <div class="card"><strong>12</strong><br><span data-en="Episodes">حلقة</span></div>
+        <div class="card"><strong>4</strong><br><span data-en="Weekly shows">برامج أسبوعية</span></div>
+        <div class="card"><strong>237</strong><br><span data-en="Reach">مستوى نشر</span></div>
+      </div>
     </div>
   </section>
 
-  <section class="contact-quick">
-    <h3>تواصل سريع</h3>
-    <p>بريد: <a href="mailto:dreamfm44@gmail.com?subject=رسالة%20من%20موقع%20دريم%20بودكاست">dreamfm44@gmail.com</a> · هاتف: <a href="tel:+967771455399">+967771455399</a></p>
-    <p>تابعنا: 
-      <a href="https://www.facebook.com/dream.podcast.fmdoc" target="_blank">فيسبوك</a> · 
-      <a href="https://www.instagram.com/dream.podcast.fm/" target="_blank">انستجرام</a>
-    </p>
+  <section class="programs-preview">
+    <div class="container">
+      <h2 data-en="Programs roadmap">خارطة البرامج</h2>
+      <div class="program-cards">
+        <a href="programs.html#grandma" class="card program-card">
+          <img src="images/programs/grandma.jpg" alt="بودكاست مع جدتي">
+          <h3 data-en="Podcast With My Grandma">بودكاست مع جدتي</h3>
+          <p data-en="Monday | 8:00 AM">الإثنين | 8:00 ص</p>
+        </a>
+
+        <a href="programs.html#voices" class="card program-card">
+          <img src="images/banners/banner1.jpg" alt="أصوات المجتمعات">
+          <h3 data-en="Voices of Communities">أصوات المجتمعات</h3>
+          <p data-en="Wednesday | 6:00 PM">الأربعاء | 6:00 م</p>
+        </a>
+
+        <!-- Placeholder cards (add more as needed) -->
+      </div>
+      <a href="programs.html" class="btn" data-en="All programs">جميع البرامج</a>
+    </div>
+  </section>
+
+  <section id="live-player" class="player-hidden">
+    <div class="container">
+      <!-- Zeno embed (responsive) -->
+      <div class="zeno-wrapper">
+        <iframe src="https://zeno.fm/player/dream-podcast" frameborder="0" scrolling="no" title="Zeno FM: Dream Podcast"></iframe>
+      </div>
+      <p class="zeno-credit"><a href="https://zeno.fm/" target="_blank" rel="noopener noreferrer">A Zeno.FM Station</a></p>
+    </div>
+  </section>
+
+  <section class="latest-news container">
+    <h2 data-en="Latest News">أحدث الأخبار</h2>
+    <div class="news-grid">
+      <article class="news-item">
+        <img src="images/news/article1.jpg" alt="">
+        <h3>دريم بودكاست تتعاون مع شركاء محليين</h3>
+        <p>شراكة استراتيجية مع منظمات محلية لتعزيز البرامج...</p>
+        <a href="news.html" class="btn" data-en="Read more">اقرأ المزيد</a>
+      </article>
+      <!-- Add more news items -->
+    </div>
   </section>
 </main>
 
 <footer class="site-footer">
-  <p>© Dream Podcast — دريم بودكاست. كل الحقوق محفوظة.</p>
-  <p>هذا الموقع يظهر البث مجاناً ١٠٠٪ عبر Zeno.fm</p>
+  <div class="container footer-inner">
+    <div>
+      <p>&copy; <span id="year"></span> دريم بودكاست</p>
+      <p data-en="All rights reserved">جميع الحقوق محفوظة</p>
+    </div>
+    <div>
+      <a href="sitemap.html" data-en="Sitemap">خريطة الموقع</a> ·
+      <a href="privacy.html" data-en="Privacy policy">سياسة الخصوصية</a>
+    </div>
+  </div>
 </footer>
 
-<script src="js/script.js"></script>
+<!-- Scripts -->
+<script src="js/main.js"></script>
+<script src="js/player.js"></script>
+<script src="js/slider.js"></script>
+<script src="js/form-validation.js"></script>
+<script src="js/analytics.js"></script>
 </body>
 </html>

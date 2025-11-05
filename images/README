@@ -1,0 +1,8 @@
+PLACEHOLDER: Add your image assets in this folder.
+Recommended files (names used in HTML):
+- images/logo.png                 (circular logo, 192x192 or higher)
+- images/banners/banner1.jpg      (banner image for programs/news)
+- images/programs/grandma.jpg     (program thumbnail)
+- images/news/article1.jpg        (news thumbnail)
+
+Upload optimized (webp/jpeg) images for faster load on mobile.

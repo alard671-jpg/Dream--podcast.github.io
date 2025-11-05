@@ -1,17 +1,27 @@
-# Dream Podcast - Website (GitHub Pages ready)
+# Dream Podcast (Website)
 
-محتويات المشروع:
-- صفحات: index.html, about.html, programs.html, news.html, contact.html, sitemap.html
-- مجلدات: css/, js/, images/
+This repository contains a static website for "Dream Podcast" with bilingual (Arabic / English) support, Zeno.fm player integration, PWA manifest, contact form (Formspree ready), and responsive layout.
 
-**ملاحظات عن الأخطاء التي وجدتها في النسخة التي أرسلتها**
-- روابط التواصل تم تحديثها لتشير إلى الصفحات الصحيحة.
-- تم إضافة subject لروابط البريد لتسهيل استقبال الرسائل.
-- تم تحويل رقم الهاتف لصيغة دولية +967.
-- تم إضافة sitemap.html لتسهيل فحص الصفحات.
+Key features:
+- Arabic-first UI (RTL), with English toggle to LTR
+- News tickers (Arabic & English) that scroll like TV crawl
+- Zeno.fm embedded player
+- Contact form with validation and Formspree support
+- PWA manifest.json and robots.txt
+- Mobile-friendly responsive design
+- Placeholder folders for images, audio, video, fonts, libs
 
-**كيفية النشر على GitHub Pages**
-1. أنشئ Repository جديد على GitHub.
-2. ارفع محتويات هذا المجلد.
-3. فعّل GitHub Pages من الإعدادات، اختر الفرع `main` والمجلد `/root`.
-4. سيظهر الموقع على: `https://USERNAME.github.io/REPO_NAME`.
+How to deploy:
+1. Create the repository on GitHub.
+2. Upload all files and folders exactly as in this tree.
+3. Add your images under `images/` (logo.png, banners, etc.).
+4. Replace the Formspree endpoint in `contact.html` with your own: `https://formspree.io/f/yourFormId`.
+5. Enable GitHub Pages in repository settings (serve from main branch / root).
+6. Wait ~60 seconds and open `https://<your-username>.github.io/<repo>/`.
+
+Notes:
+- Replace analytics placeholder with your tracking snippet if needed.
+- Edit `manifest.json` icons and colors to match branding.
+- Provide real content for legal pages (terms & privacy).
+
+Prepared by: GitHub Copilot (project scaffolding)
