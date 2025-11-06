@@ -1,153 +1,68 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="دريم بودكاست - تمكين المرأة في اليمن، 4 برامج أسبوعية، Zeno Radio، SDGs 5,13,16" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>دريم بودكاست | Dream Podcast</title>
-
-  <!-- Styles -->
-  <link rel="stylesheet" href="css/reset.css" />
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/theme.css" />
-  <link rel="stylesheet" href="css/responsive.css" />
-
-  <!-- PWA -->
-  <link rel="manifest" href="manifest.json" />
-
-  <!-- SEO -->
-  <meta name="robots" content="index, follow" />
+  <meta name="description" content="دريم بودكاست - تمكين المرأة، مواجهة التغيرات المناخية، بناء السلام">
+  <style>
+    body{font-family:'Tajawal',sans-serif;background:#f0f8ff;margin:0;padding-top:100px;color:#333}
+    .ticker{position:fixed;width:100%;background:#1e88e5;color:#fff;padding:10px;overflow:hidden;z-index:1000;white-space:nowrap;font-size:14px}
+    .ticker-ar{top:0}
+    .ticker-en{top:40px;background:#1565c0}
+    .ticker-content{display:inline-block;animation:scroll-left 60s linear infinite}
+    .ticker-en .ticker-content{animation:scroll-right 60s linear infinite}
+    @keyframes scroll-left{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+    @keyframes scroll-right{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+    #clock-widget{position:fixed;top:90px;right:20px;background:#fff;padding:10px 16px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.1);font-weight:bold;color:#1b5e20;transition:opacity 0.3s}
+    header{text-align:center;padding:60px 20px;background:#800000;color:#fff}
+    .logo{width:120px;border-radius:50%;border:4px solid #fff}
+    .btn{background:#ff5722;color:#fff;padding:12px 28px;border-radius:30px;text-decoration:none;display:inline-block;margin:10px}
+    .summary{background:#e8f5e9;padding:30px;border-radius:16px;margin:20px}
+    .container{max-width:1000px;margin:auto;padding:20px}
+    #live-player{display:none;text-align:center;padding:40px;background:#f9f9f9}
+    iframe{width:100%;max-width:600px;height:250px;border-radius:16px}
+    @media(max-width:600px){.ticker{font-size:12px}#clock-widget{top:70px;right:10px;font-size:14px}}
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body class="ar">
+<body>
 
-<!-- Arabic ticker (text moves like TV) -->
-<div class="ticker ticker-ar" aria-hidden="true">
-  <div class="ticker-content">
-    UNDP تدعم تمكين النساء • WPHF تطلق منح سلام • دريم بودكاست تبث 4 برامج • 237 مستوى نشر • 12,500 مستمع • تاريخ الإطلاق: 1 أغسطس 2025
-  </div>
-</div>
+<div class="ticker ticker-ar"><div class="ticker-content">دريم بودكاست يبث 4 برامج أسبوعية • تمكين المرأة • مواجهة المناخ • بناء السلام • 50% تركيز على المرأة</div></div>
+<div class="ticker ticker-en"><div class="ticker-content">Dream Podcast: 4 weekly shows • Empowering Women • Climate Action • Peacebuilding • 50% Focus on Women</div></div>
 
-<!-- English ticker -->
-<div class="ticker ticker-en" aria-hidden="true">
-  <div class="ticker-content">
-    UNDP supports women • WPHF launches peace grants • Dream Podcast: 4 weekly shows • Reach: 237 • Launch: Aug 1, 2025
-  </div>
-</div>
+<div id="clock-widget"><div id="time">--:--</div><div id="date">---</div></div>
 
-<!-- Clock (disappears on scroll) -->
-<div id="clock-widget" aria-live="polite" title="الوقت والتاريخ">
-  <div id="time">--:--:--</div>
-  <div id="date">---</div>
-</div>
-
-<header class="site-header" role="banner">
-  <div class="container header-inner">
-    <div class="brand">
-      <img src="images/logo.png" alt="شعار دريم بودكاست" class="logo" width="140" height="140">
-      <div class="brand-text">
-        <h1 data-en="Dream Podcast">دريم بودكاست</h1>
-        <p data-en="Together we make the dream real">معاً نحقق حلمك</p>
-      </div>
-    </div>
-
-    <div class="cta">
-      <button class="btn" onclick="playLive()" data-en="Listen Live">استمع الآن</button>
-    </div>
-  </div>
+<header>
+  <img src="images/logo.png" alt="شعار دريم بودكاست" class="logo">
+  <h1>دريم بودكاست</h1>
+  <p>معاً نحقق حلمك</p>
+  <button onclick="document.getElementById('live-player').style.display='block';this.scrollIntoView({behavior:'smooth'})">استمع الآن</button>
 </header>
 
-<nav class="lang-switch" role="navigation" aria-label="Switch language">
-  <button class="active" data-lang="ar" title="عرض بالعربية">العربية</button>
-  <button data-lang="en" title="View in English">English</button>
-</nav>
-
-<main id="main-content" role="main">
-  <section class="hero">
-    <div class="container">
-      <h2 data-en="Dream Podcast Radio Project">مشروع إذاعة دريم بودكاست</h2>
-      <p data-en="Voice of sustainable development, climate and human rights, and peacebuilding in Yemen">
-        صوت التنمية المستدامة والمناخ وحقوق الإنسان وبناء السلام في اليمن
-      </p>
-      <a href="about.html" class="btn" data-en="Read more">اقرأ المزيد</a>
-    </div>
-  </section>
-
-  <section class="stats">
-    <div class="container">
-      <h2 data-en="Our statistics">إحصائياتنا</h2>
-      <div class="grid">
-        <div class="card"><strong>200+</strong><br><span data-en="Followers">متابع</span></div>
-        <div class="card"><strong>12</strong><br><span data-en="Episodes">حلقة</span></div>
-        <div class="card"><strong>4</strong><br><span data-en="Weekly shows">برامج أسبوعية</span></div>
-        <div class="card"><strong>237</strong><br><span data-en="Reach">مستوى نشر</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="programs-preview">
-    <div class="container">
-      <h2 data-en="Programs roadmap">خارطة البرامج</h2>
-      <div class="program-cards">
-        <a href="programs.html#grandma" class="card program-card">
-          <img src="images/programs/grandma.jpg" alt="بودكاست مع جدتي">
-          <h3 data-en="Podcast With My Grandma">بودكاست مع جدتي</h3>
-          <p data-en="Monday | 8:00 AM">الإثنين | 8:00 ص</p>
-        </a>
-
-        <a href="programs.html#voices" class="card program-card">
-          <img src="images/banners/banner1.jpg" alt="أصوات المجتمعات">
-          <h3 data-en="Voices of Communities">أصوات المجتمعات</h3>
-          <p data-en="Wednesday | 6:00 PM">الأربعاء | 6:00 م</p>
-        </a>
-
-        <!-- Placeholder cards (add more as needed) -->
-      </div>
-      <a href="programs.html" class="btn" data-en="All programs">جميع البرامج</a>
-    </div>
-  </section>
-
-  <section id="live-player" class="player-hidden">
-    <div class="container">
-      <!-- Zeno embed (responsive) -->
-      <div class="zeno-wrapper">
-        <iframe src="https://zeno.fm/player/dream-podcast" frameborder="0" scrolling="no" title="Zeno FM: Dream Podcast"></iframe>
-      </div>
-      <p class="zeno-credit"><a href="https://zeno.fm/" target="_blank" rel="noopener noreferrer">A Zeno.FM Station</a></p>
-    </div>
-  </section>
-
-  <section class="latest-news container">
-    <h2 data-en="Latest News">أحدث الأخبار</h2>
-    <div class="news-grid">
-      <article class="news-item">
-        <img src="images/news/article1.jpg" alt="">
-        <h3>دريم بودكاست تتعاون مع شركاء محليين</h3>
-        <p>شراكة استراتيجية مع منظمات محلية لتعزيز البرامج...</p>
-        <a href="news.html" class="btn" data-en="Read more">اقرأ المزيد</a>
-      </article>
-      <!-- Add more news items -->
-    </div>
-  </section>
-</main>
-
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <div>
-      <p>&copy; <span id="year"></span> دريم بودكاست</p>
-      <p data-en="All rights reserved">جميع الحقوق محفوظة</p>
-    </div>
-    <div>
-      <a href="sitemap.html" data-en="Sitemap">خريطة الموقع</a> ·
-      <a href="privacy.html" data-en="Privacy policy">سياسة الخصوصية</a>
-    </div>
+<div class="container">
+  <div class="summary">
+    <h2>الملخص النهائي</h2>
+    <ul>
+      <li><strong>تاريخ الإطلاق:</strong> 1 أغسطس 2025</li>
+      <li><strong>الهدف:</strong> تمكين المرأة، مواجهة التغيرات المناخية، بناء السلام</li>
+      <li><strong>الأنشطة:</strong> إنتاج 4 برامج بودكاست أسبوعية، بث عبر <a href="https://www.dream-podcast.net/">dream-podcast.net</a></li>
+      <li><strong>التركيز:</strong> 50% على دور المرأة في السلام وحقوق الإنسان، دعم الفئات المهمشة</li>
+      <li><strong>التواصل:</strong> DreamFM44@gmail.com | 00967-771455399</li>
+    </ul>
   </div>
-</footer>
 
-<!-- Scripts -->
-<script src="js/main.js"></script>
-<script src="js/player.js"></script>
-<script src="js/slider.js"></script>
-<script src="js/form-validation.js"></script>
-<script src="js/analytics.js"></script>
+  <div id="live-player">
+    <iframe src="https://zeno.fm/player/dream-podcast" frameborder="0"></iframe>
+    <p><a href="https://zeno.fm/" target="_blank">A Zeno.FM Station</a></p>
+  </div>
+
+  <p style="text-align:center"><a href="programs.html" class="btn">خارطة البرامج</a></p>
+</div>
+
+<script>
+setInterval(()=>{const d=new Date();document.getElementById('time').innerText=d.toLocaleTimeString('en-US',{hour12:false}).slice(0,5);document.getElementById('date').innerText=d.toLocaleDateString('en-US');},1000);
+let last=0;window.addEventListener('scroll',()=>{const cur=window.pageYOffset;document.getElementById('clock-widget').style.opacity=(cur>last+50)?'0':'1';last=cur;});
+</script>
 </body>
 </html>
