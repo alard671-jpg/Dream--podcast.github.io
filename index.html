@@ -7,63 +7,139 @@
   <meta name="description" content="دريم بودكاست - تمكين المرأة، مواجهة التغيرات المناخية، بناء السلام في اليمن">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body{font-family:'Tajawal',sans-serif;background:#f0f8ff;margin:0;padding-top:80px;color:#333}
-    .ticker{position:fixed;width:100%;background:#1e88e5;color:#fff;padding:10px 0;overflow:hidden;z-index:1000;white-space:nowrap;font-size:14px}
-    .ticker-ar{top:0}
+    :root{box-sizing:border-box}
+    *,*::before,*::after{box-sizing:inherit}
+    body{
+      font-family:'Tajawal',sans-serif;
+      background:#f0f8ff;
+      margin:0;
+      padding-top:80px;
+      color:#333;
+      line-height:1.5;
+    }
+
+    /* Ticker (top bars) */
+    .ticker{
+      position:fixed;
+      width:100%;
+      left:0;
+      right:0;
+      color:#fff;
+      overflow:hidden;
+      z-index:1000;
+      white-space:nowrap;
+      font-size:14px;
+      padding:10px 0;
+    }
+    .ticker-ar{top:0;background:#1e88e5}
     .ticker-en{top:40px;background:#1565c0}
-    .ticker-content{display:inline-block;animation:scroll-left 60s linear infinite}
-    .ticker-en .ticker-content{animation:scroll-right 60s linear infinite}
-    @keyframes scroll-left{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
-    @keyframes scroll-right{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
-    #clock-widget{position:fixed;top:90px;right:20px;background:#fff;padding:10px 16px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.1);font-weight:bold;color:#1b5e20;transition:opacity 0.3s}
-    header{text-align:center;padding:60px 20px;background:#800000;color:#fff}
-    .logo{width:120px;border-radius:50%;border:4px solid #fff}
-    .btn{background:#ff5722;color:#fff;padding:12px 28px;border-radius:30px;text-decoration:none;display:inline-block;margin:10px}
-    .summary{background:#e8f5e9;padding:30px;border-radius:16px;margin:20px auto;max-width:900px}
+    .ticker-content{display:inline-block;animation:scroll-left 60s linear infinite;padding-left:100%}
+
+    @keyframes scroll-left{
+      0%{transform:translateX(0)}
+      100%{transform:translateX(-100%)}
+    }
+
+    header{
+      text-align:center;
+      padding:60px 20px;
+      background:#800000;
+      color:#fff;
+      position:relative;
+    }
+    .logo{width:120px;border-radius:50%;border:4px solid #fff;display:block;margin:0 auto 12px}
+    .btn{
+      background:#ff5722;
+      color:#fff;
+      padding:12px 28px;
+      border-radius:30px;
+      text-decoration:none;
+      display:inline-block;
+      margin:10px;
+      border:0;
+      cursor:pointer;
+      font-size:16px;
+    }
+
+    .summary{
+      background:#e8f5e9;
+      padding:30px;
+      border-radius:16px;
+      margin:20px auto;
+      max-width:900px;
+    }
+
     .container{max-width:1000px;margin:auto;padding:20px}
-    #live-player{display:none;text-align:center;padding:40px;background:#f9f9f9}
-    iframe{width:100%;max-width:600px;height:250px;border-radius:16px}
-    @media(max-width:600px){.ticker{font-size:12px}#clock-widget{top:70px;right:10px;font-size:14px}}
+    #live-player{display:none;text-align:center;padding:40px;background:#f9f9f9;border-radius:12px}
+    iframe{width:100%;max-width:600px;height:250px;border-radius:16px;border:0}
+
+    @media(max-width:600px){
+      .ticker{font-size:12px}
+      header{padding:40px 12px}
+      body{padding-top:100px}
+    }
+
+    /* Small utilities */
+    a{color:#1565c0}
+    ul{margin:0;padding-left:1rem}
   </style>
 </head>
 <body>
-
-<div class="ticker ticker-ar"><div class="ticker-content">دريم بودكاست يبث 4 برامج أسبوعية • تمكين المرأة • مواجهة المناخ • بناء السلام • 50% تركيز على المرأة</div></div>
-<div class="ticker ticker-en"><div class="ticker-content">Dream Podcast: 4 weekly shows • Empowering Women • Climate Action • Peacebuilding • 50% Focus on Women</div></div>
-
-<div id="clock-widget"><div id="time">--:--</div><div id="date">---</div></div>
-
-<header>
-  <img src="images/logo.png" alt="شعار دريم بودكاست" class="logo">
-  <h1>دريم بودكاست</h1>
-  <p>معاً نحقق حلمك</p>
-  <button class="btn" onclick="document.getElementById('live-player').style.display='block';this.scrollIntoView({behavior:'smooth'})">استمع الآن</button>
-</header>
-
-<div class="container">
-
-  <div class="summary">
-    <h2 style="text-align:center;color:#800000">الملخص النهائي</h2>
-    <ul style="list-style:none;padding:0">
-      <li><strong>تاريخ الإطلاق:</strong> 1 أغسطس 2025</li>
-      <li><strong>الهدف:</strong> تمكين المرأة، مواجهة التغيرات المناخية، بناء السلام</li>
-      <li><strong>الأنشطة:</strong> إنتاج 4 برامج بودكاست أسبوعية، بث عبر <a href="https://www.dream-podcast.net/">dream-podcast.net</a></li>
-      <li><strong>التركيز:</strong> 50% على دور المرأة في السلام وحقوق الإنسان، دعم الفئات المهمشة</li>
-      <li><strong>التواصل:</strong> DreamFM44@gmail.com | 00967-771455399</li>
-    </ul>
+  <!-- Top tickers (optional) -->
+  <div class="ticker ticker-ar" aria-hidden="true">
+    <div class="ticker-content">مرحباً بكم في دريم بودكاست — تمكين المرأة، مواجهة التغيرات المناخية، بناء السلام.</div>
+  </div>
+  <div class="ticker ticker-en" aria-hidden="true">
+    <div class="ticker-content">Welcome to Dream Podcast — Empowering women, addressing climate change, building peace.</div>
   </div>
 
-  <div id="live-player">
-    <iframe src="https://zeno.fm/player/dream-podcast" frameborder="0"></iframe>
-    <p><a href="https://zeno.fm/" target="_blank">A Zeno.FM Station</a></p>
-  </div>
+  <header>
+    <img src="images/logo.png" alt="شعار دريم بودكاست" class="logo">
+    <h1>دريم بودكاست</h1>
+    <p>معاً نحقق حلمك</p>
+    <button id="play-btn" class="btn" aria-controls="live-player" aria-expanded="false" onclick="togglePlayer()">استمع الآن</button>
+  </header>
 
-  <p style="text-align:center"><a href="programs.html" class="btn">خارطة البرامج</a></p>
-</div>
+  <main class="container" id="main-content">
+    <div class="summary" role="region" aria-label="الملخص النهائي">
+      <h2 style="text-align:center;color:#800000">الملخص النهائي</h2>
+      <ul style="list-style:none;padding:0;margin-top:12px">
+        <li><strong>تاريخ الإطلاق:</strong> 1 أغسطس 2025</li>
+        <li><strong>الهدف:</strong> تمكين المرأة، مواجهة التغيرات المناخية، بناء السلام</li>
+        <li><strong>الأنشطة:</strong> إنتاج 4 برامج بودكاست أسبوعية، بث عبر <a href="https://www.dream-podcast.net/">dream-podcast.net</a></li>
+      </ul>
+    </div>
 
-<script>
-setInterval(()=>{const d=new Date();document.getElementById('time').innerText=d.toLocaleTimeString('en-US',{hour12:false}).slice(0,5);document.getElementById('date').innerText=d.toLocaleDateString('en-US');},1000);
-let last=0;window.addEventListener('scroll',()=>{const cur=window.pageYOffset;document.getElementById('clock-widget').style.opacity=(cur>last+50)?'0':'1';last=cur;});
-</script>
+    <div id="live-player" aria-hidden="true">
+      <!-- استبدل src بالرابط الفعلي للبث المباشر إن وُجد -->
+      <iframe src="about:blank" title="مشغل البث المباشر" allow="autoplay; encrypted-media"></iframe>
+    </div>
+  </main>
+
+  <script>
+    function togglePlayer(){
+      const player = document.getElementById('live-player');
+      const btn = document.getElementById('play-btn');
+      const isVisible = player.style.display === 'block';
+      player.style.display = isVisible ? 'none' : 'block';
+      player.setAttribute('aria-hidden', isVisible ? 'true' : 'false');
+      btn.setAttribute('aria-expanded', String(!isVisible));
+      if (!isVisible) {
+        // عند الظهور، نمرّر العنصر إلى العرض بسلاسة
+        player.scrollIntoView({behavior:'smooth'});
+      } else {
+        // عند الإخفاء نعود إلى رأس الصفحة
+        window.scrollTo({top:0,behavior:'smooth'});
+      }
+    }
+
+    // اختياري: تأخير تفعيل التحريك لمنع مشاكل التحميل
+    window.addEventListener('load', function(){
+      document.querySelectorAll('.ticker-content').forEach(function(el){
+        // إعادة تعيين padding-left في حال لزم
+        el.style.paddingLeft = '100%';
+      });
+    });
+  </script>
 </body>
 </html>
