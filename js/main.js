@@ -1,70 +1,48 @@
-// main.js - clock, language switch, scroll hiding
+// Main JS for Dream Podcast site
+
 (function(){
-  // Clock
-  const timeEl = document.getElementById('time');
-  const dateEl = document.getElementById('date');
-  function updateClock(){
-    const now = new Date();
-    if(timeEl) timeEl.innerText = now.toLocaleTimeString(undefined, { hour12:false });
-    if(dateEl) dateEl.innerText = now.toLocaleDateString(undefined, { weekday:'long', year:'numeric', month:'short', day:'numeric' });
-  }
-  updateClock();
-  setInterval(updateClock, 1000);
+  'use strict';
 
-  // Hide clock on scroll down, show on scroll up
-  const clock = document.getElementById('clock-widget');
-  let lastScroll = 0;
-  window.addEventListener('scroll', () => {
-    const current = window.pageYOffset || document.documentElement.scrollTop;
-    if (!clock) return;
-    if (current > lastScroll + 60) clock.classList.add('hidden');
-    else if (current < lastScroll - 60) clock.classList.remove('hidden');
-    lastScroll = current;
-  });
+  function setUpPlayer(){
+    const btn = document.getElementById('play-btn');
+    const player = document.getElementById('live-player');
+    const iframe = player.querySelector('iframe');
 
-  // Language switch - swaps text for elements that have data-en attributes
-  function setLanguage(lang){
-    const root = document.documentElement;
-    if(lang === 'en'){
-      root.lang = 'en';
-      root.dir = 'ltr';
-      document.body.classList.remove('ar'); document.body.classList.add('en');
-    } else {
-      root.lang = 'ar';
-      root.dir = 'rtl';
-      document.body.classList.remove('en'); document.body.classList.add('ar');
+    function togglePlayer(){
+      const isVisible = player.classList.toggle('visible');
+      player.setAttribute('aria-hidden', String(!isVisible));
+      btn.setAttribute('aria-expanded', String(isVisible));
+
+      if(isVisible){
+        if(iframe && (!iframe.getAttribute('src') || iframe.getAttribute('src') === 'about:blank')){
+          iframe.setAttribute('src', 'https://zeno.fm/player/dream-podcast');
+        }
+        player.scrollIntoView({behavior:'smooth', block:'center'});
+      } else {
+        if(iframe) iframe.setAttribute('src','about:blank');
+        window.scrollTo({top:0,behavior:'smooth'});
+      }
     }
 
-    document.querySelectorAll('[data-en]').forEach(el => {
-      if(lang === 'en'){
-        // store Arabic version if not stored
-        if(!el.dataset.ar) el.dataset.ar = el.innerHTML;
-        el.innerHTML = el.dataset.en;
-      } else {
-        if(el.dataset.ar) el.innerHTML = el.dataset.ar;
-      }
-    });
+    btn.addEventListener('click', togglePlayer);
+  }
 
-    // update active buttons visually
-    document.querySelectorAll('.lang-switch button').forEach(b => {
-      b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+  function initTickers(){
+    document.querySelectorAll('.ticker-content').forEach(function(el){
+      // ensure initial padding for smooth start
+      el.style.paddingLeft = '100%';
+
+      // pause animation on hover/focus for accessibility
+      el.addEventListener('mouseenter', function(){ el.style.animationPlayState = 'paused'; });
+      el.addEventListener('mouseleave', function(){ el.style.animationPlayState = ''; });
+      el.addEventListener('focusin', function(){ el.style.animationPlayState = 'paused'; });
+      el.addEventListener('focusout', function(){ el.style.animationPlayState = ''; });
     });
   }
 
-  document.querySelectorAll('.lang-switch button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const lang = btn.getAttribute('data-lang');
-      setLanguage(lang);
-      // set hidden language inputs if any
-      document.querySelectorAll('input[name="_language"]').forEach(i => i.value = lang);
-    });
+  window.addEventListener('load', function(){
+    setUpPlayer();
+    initTickers();
   });
 
-  // set default (page-level HTML lang decides initial)
-  setLanguage(document.documentElement.lang || 'ar');
-
-  // inject current year in footer
-  const y = new Date().getFullYear();
-  const yearEl = document.getElementById('year');
-  if(yearEl) yearEl.textContent = y;
 })();
