@@ -1,12 +1,11 @@
 {
-  "name": "Dream Podcast",
-  "short_name": "DreamFM",
+  "name": "دريم بودكاست",
+  "short_name": "DreamPod",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#800000",
-  "theme_color": "#ff5722",
+  "background_color": "#f0f8ff",
+  "theme_color": "#800000",
   "icons": [
-    { "src": "images/logo.png", "sizes": "192x192", "type": "image/png" }
-  ],
-  "description": "دريم بودكاست - راديو المجتمع والتنمية والسلام"
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
 }

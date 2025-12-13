@@ -1,91 +1,19 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>دريم بودكاست | Dream Podcast</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>دريم بودكاست</title>
   <meta name="description" content="دريم بودكاست - تمكين المرأة، مواجهة التغيرات المناخية، بناء السلام في اليمن">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    :root{box-sizing:border-box}
-    *,*::before,*::after{box-sizing:inherit}
-    body{
-      font-family:'Tajawal',sans-serif;
-      background:#f0f8ff;
-      margin:0;
-      padding-top:80px;
-      color:#333;
-      line-height:1.5;
-    }
-
-    /* Ticker (top bars) */
-    .ticker{
-      position:fixed;
-      width:100%;
-      left:0;
-      right:0;
-      color:#fff;
-      overflow:hidden;
-      z-index:1000;
-      white-space:nowrap;
-      font-size:14px;
-      padding:10px 0;
-    }
-    .ticker-ar{top:0;background:#1e88e5}
-    .ticker-en{top:40px;background:#1565c0}
-    .ticker-content{display:inline-block;animation:scroll-left 60s linear infinite;padding-left:100%}
-
-    @keyframes scroll-left{
-      0%{transform:translateX(0)}
-      100%{transform:translateX(-100%)}
-    }
-
-    header{
-      text-align:center;
-      padding:60px 20px;
-      background:#800000;
-      color:#fff;
-      position:relative;
-    }
-    .logo{width:120px;border-radius:50%;border:4px solid #fff;display:block;margin:0 auto 12px}
-    .btn{
-      background:#ff5722;
-      color:#fff;
-      padding:12px 28px;
-      border-radius:30px;
-      text-decoration:none;
-      display:inline-block;
-      margin:10px;
-      border:0;
-      cursor:pointer;
-      font-size:16px;
-    }
-
-    .summary{
-      background:#e8f5e9;
-      padding:30px;
-      border-radius:16px;
-      margin:20px auto;
-      max-width:900px;
-    }
-
-    .container{max-width:1000px;margin:auto;padding:20px}
-    #live-player{display:none;text-align:center;padding:40px;background:#f9f9f9;border-radius:12px}
-    iframe{width:100%;max-width:600px;height:250px;border-radius:16px;border:0}
-
-    @media(max-width:600px){
-      .ticker{font-size:12px}
-      header{padding:40px 12px}
-      body{padding-top:100px}
-    }
-
-    /* Small utilities */
-    a{color:#1565c0}
-    ul{margin:0;padding-left:1rem}
-  </style>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-  <!-- Top tickers (optional) -->
+  <a class="skip-link" href="#main-content">تخطي إلى المح��وى</a>
+
+  <!-- Top tickers -->
   <div class="ticker ticker-ar" aria-hidden="true">
     <div class="ticker-content">مرحباً بكم في دريم بودكاست — تمكين المرأة، مواجهة التغيرات المناخية، بناء السلام.</div>
   </div>
@@ -94,52 +22,31 @@
   </div>
 
   <header>
-    <img src="images/logo.png" alt="شعار دريم بودكاست" class="logo">
+    <img src="/images/logo.svg" alt="شعار دريم بودكاست" class="logo">
     <h1>دريم بودكاست</h1>
     <p>معاً نحقق حلمك</p>
-    <button id="play-btn" class="btn" aria-controls="live-player" aria-expanded="false" onclick="togglePlayer()">استمع الآن</button>
+    <button id="play-btn" class="btn" aria-controls="live-player" aria-expanded="false">استمع الآن</button>
   </header>
 
   <main class="container" id="main-content">
     <div class="summary" role="region" aria-label="الملخص النهائي">
-      <h2 style="text-align:center;color:#800000">الملخص النهائي</h2>
-      <ul style="list-style:none;padding:0;margin-top:12px">
+      <h2 class="summary-title">الملخص النهائي</h2>
+      <ul class="summary-list">
         <li><strong>تاريخ الإطلاق:</strong> 1 أغسطس 2025</li>
         <li><strong>الهدف:</strong> تمكين المرأة، مواجهة التغيرات المناخية، بناء السلام</li>
         <li><strong>الأنشطة:</strong> إنتاج 4 برامج بودكاست أسبوعية، بث عبر <a href="https://www.dream-podcast.net/">dream-podcast.net</a></li>
+        <li><strong>التركيز:</strong> 50% على دور المرأة في السلام وحقوق الإنسان، دعم الفئات المهمشة</li>
+        <li><strong>التواصل:</strong> DreamFM44@gmail.com | 00967-771455399</li>
       </ul>
     </div>
 
-    <div id="live-player" aria-hidden="true">
-      <!-- استبدل src بالرابط الفعلي للبث المباشر إن وُجد -->
-      <iframe src="about:blank" title="مشغل البث المباشر" allow="autoplay; encrypted-media"></iframe>
+    <div id="live-player" aria-hidden="true" class="live-player">
+      <iframe src="about:blank" title="مشغل البث المباشر" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+      <p class="small"><a href="https://zeno.fm/" target="_blank" rel="noopener">A Zeno.FM Station</a></p>
     </div>
+
   </main>
 
-  <script>
-    function togglePlayer(){
-      const player = document.getElementById('live-player');
-      const btn = document.getElementById('play-btn');
-      const isVisible = player.style.display === 'block';
-      player.style.display = isVisible ? 'none' : 'block';
-      player.setAttribute('aria-hidden', isVisible ? 'true' : 'false');
-      btn.setAttribute('aria-expanded', String(!isVisible));
-      if (!isVisible) {
-        // عند الظهور، نمرّر العنصر إلى العرض بسلاسة
-        player.scrollIntoView({behavior:'smooth'});
-      } else {
-        // عند الإخفاء نعود إلى رأس الصفحة
-        window.scrollTo({top:0,behavior:'smooth'});
-      }
-    }
-
-    // اختياري: تأخير تفعيل التحريك لمنع مشاكل التحميل
-    window.addEventListener('load', function(){
-      document.querySelectorAll('.ticker-content').forEach(function(el){
-        // إعادة تعيين padding-left في حال لزم
-        el.style.paddingLeft = '100%';
-      });
-    });
-  </script>
+  <script src="/js/main.js" defer></script>
 </body>
 </html>
