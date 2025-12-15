@@ -1,210 +1,198 @@
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="دريم بودكاست - إذاعة التنمية المستدامة لتمكين المرأة في اليمن، 4 برامج أسبوعية، 200+ متابع، 12,500 مستمع محتمل، SDGs 5,13,16">
-  <title>دريم بودكاست | Dream Podcast - صوت السلام والمناخ</title>
+  <title>دريم بودكاست | Dream Podcast</title>
+  <meta name="description" content="دريم بودكاست - تمكين المرأة، مواجهة التغيرات المناخية، بناء السلام في اليمن">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body{font-family:Arial,sans-serif;background:#E0F7FA;color:#333;margin:0;padding-top:120px;line-height:1.6}
-    header{background:#800000;color:#FFF;padding:50px 20px;text-align:center;position:relative}
-    .logo-bg{background:#800000;padding:15px;border-radius:50%;display:inline-block}
-    button{background:#FF5722;color:#FFF;padding:15px 30px;border:none;border-radius:30px;font-size:18px;cursor:pointer;transition:0.3s}
-    button:hover{background:#E64A19}
-    .ticker{position:fixed;top:0;width:100%;background:#2196F3;color:#FFF;padding:10px;overflow:hidden;z-index:1000;font-size:14px;white-space:nowrap}
-    .ticker-ar{animation:scroll-left 40s linear infinite}
-    .ticker-en{animation:scroll-right 40s linear infinite;top:50px;background:#1976D2}
-    @keyframes scroll-left{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
-    @keyframes scroll-right{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
-    table{width:90%;max-width:800px;margin:30px auto;border-collapse:collapse}
-    th,td{border:1px solid #81C784;padding:12px;text-align:center}
-    th{background:#4CAF50;color:#FFF}
-    .program-card{border:1px solid #ddd;padding:15px;border-radius:12px;text-align:center;margin:15px;background:#FFF;box-shadow:0 4px 8px rgba(0,0,0,0.1);cursor:pointer;transition:0.3s}
-    .program-card:hover{transform:scale(1.05);box-shadow:0 8px 16px rgba(0,0,0,0.2)}
-    .social a{margin:10px;display:inline-block}
-    .lang-tabs button{margin:5px;padding:10px 15px;background:#4CAF50;color:#FFF;border:none;border-radius:5px;cursor:pointer}
-    .lang-tabs button.active{background:#1B5E20}
-    iframe{width:100%;max-width:575px;height:250px;border:none;border-radius:10px}
-    footer{background:#1B5E20;color:#FFF;padding:25px;text-align:center;font-size:14px}
-    .impact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px;text-align:center;margin:30px auto;max-width:900px}
-    .impact-card{background:#FFF;padding:20px;border-radius:12px;box-shadow:0 4px 8px rgba(0,0,0,0.1)}
-    .clock{font-size:24px;font-weight:bold;color:#1B5E20}
-    @media (max-width:600px){.ticker{font-size:12px;padding:8px} table{font-size:14px} header{padding:30px 15px} .program-card{margin:10px}}
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: #f9f6fc;
+      color: #333;
+      margin: 0;
+      padding-top: 120px;
+      line-height: 1.8;
+}
+.ticker {
+      position: fixed;
+      width: 100%;
+      color: #fff;
+      padding: 10px;
+      overflow: hidden;
+      z-index: 1000;
+      white-space: nowrap;
+      font-size: 14px;
+}
+.ticker-ar {
+      top: 0;
+      background: #800040;
+}
+.ticker-en {
+      top: 40px;
+      background: #4b0082;
+}
+.ticker-content {
+      display: inline-block;
+      animation-duration: 60s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+}
+.ticker-ar.ticker-content {
+      animation-name: scroll-rtl;
+}
+.ticker-en.ticker-content {
+      animation-name: scroll-ltr;
+}
+    @keyframes scroll-rtl {
+      0% { transform: translateX(-100%);}
+      100% { transform: translateX(100%);}
+}
+    @keyframes scroll-ltr {
+      0% { transform: translateX(100%);}
+      100% { transform: translateX(-100%);}
+}
+    header {
+      text-align: center;
+      padding: 60px 20px;
+      background: #800040;
+      color: #fff;
+}
+.logo {
+      width: 120px;
+      border-radius: 50%;
+      border: 4px solid #fff;
+}
+.btn {
+      background: #4b0082;
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      display: inline-block;
+      margin: 10px;
+}
+.summary,.about {
+      background: #f3e5f5;
+      padding: 30px;
+      border-radius: 16px;
+      max-width: 900px;
+      margin: 40px auto;
+}
+.programs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin: 40px auto;
+      max-width: 1000px;
+}
+.program-card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.program-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 12px;
+}
+    #live-player {
+      display: none;
+      text-align: center;
+      padding: 40px;
+      background: #f9f9f9;
+}
+    iframe {
+      width: 100%;
+      max-width: 600px;
+      height: 250px;
+      border-radius: 16px;
+      border: none;
+}
+.social,.sdgs {
+      text-align: center;
+      padding: 30px;
+}
+.social img,.sdgs img {
+      width: 48px;
+      margin: 10px;
+}
+.sdgs img {
+      width: 80px;
+}
+    #clock-widget {
+      position: fixed;
+      top: 90px;
+      right: 20px;
+      z-index: 1000;
+}
+    @media(max-width:600px) {
+.ticker { font-size: 12px;}
+.programs-grid { grid-template-columns: 1fr;}
+      #clock-widget { top: 70px; right: 10px;}
+}
   </style>
 </head>
 <body>
 
-<!-- الساعة والتاريخ (مباشرة، ميلادي) -->
-<div style="position:fixed;top:100px;right:20px;background:#FFF;padding:10px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.1);z-index:1000;text-align:center">
-  <div class="clock" id="clock"></div>
-  <div id="date" style="font-size:14px;color:#555"></div>
-</div>
-
-<!-- شريط أخبار عربي (من اليسار إلى اليمين) -->
-<div class="ticker ticker-ar">
-  UNDP تدعم تمكين النساء في اليمن • WPHF تطلق منح سلام نسائي • دريم بودكاست تبث 4 برامج أسبوعية • 237 مستوى نشر • 12,500 مستمع محتمل • تاريخ الإطلاق: 1 أغسطس 2025 • ميزانية: 850K مشاهدة • تكلفة: 4.1 مليون
-</div>
-
-<!-- شريط أخبار إنجليزي (من اليمين إلى اليسار) -->
-<div class="ticker ticker-en">
-  UNDP supports women in Yemen • WPHF launches peace grants • Dream Podcast: 4 weekly shows • 237 Reach • 12,500 Potential Listeners • Launch: Aug 1, 2025 • Budget: 850K Views • Cost: 4.1M
+<div class="ticker ticker-ar"><div class="ticker-content">دريم بودكاست يبث 4 برامج أسبوعية • تمكين المرأة • مواجهة المناخ • بناء السلام • 50% تركيز على المرأة</div></div>
+<div class="ticker ticker-en"><div class="ticker-content">Dream Podcast: 4 weekly shows • Empowering Women • Climate Action • Peacebuilding • 50% Focus on Women</div></div>
+<div id="clock-widget">
+  <iframe src="https://free.timeanddate.com/clock/i9zq3j3i/n60/szw110/szh110/hocfff/hbw0/hfc000/cf100/hgr0/fas30/facfff/fdi70/mqcfff/mqs3/mql5/mqw4/mqd70/mhcfff/mhs3/mhl5/mhw4/mhd70/mmcfff/mml4/mmw1/mmd70" frameborder="0" width="110" height="110"></iframe>
 </div>
 
 <header>
-  <div class="logo-bg">[مكان الشعار العنابي هنا]</div>
-  <h1>دريم بودكاست / Dream Podcast</h1>
-  <p style="font-size:1.3em">تمكين المرأة في مواجهة التغيرات المناخية وبناء السلام<br>Empowering Women in Climate Change & Peacebuilding</p>
-  <button onclick="playLive()">استمع الآن / Listen Live</button>
+  <img src="images/logo.png" alt="شعار دريم بودكاست" class="logo">
+  <h1>دريم بودكاست</h1>
+  <p>معاً نحقق حلمك</p>
+  <button class="btn" onclick="document.getElementById('live-player').style.display='block';this.scrollIntoView({behavior:'smooth'})">استمع الآن</button>
 </header>
 
-<!-- تبويبات اللغة -->
-<div style="text-align:center;padding:15px;background:#FFF">
-  <div class="lang-tabs">
-    <button class="active" onclick="showLang('ar')">العربية</button>
-    <button onclick="showLang('en')">English</button>
+<div class="container">
+  <div class="summary">
+    <h2>الملخص النهائي</h2>
+    <ul>
+      <li><strong>تاريخ الإطلاق:</strong> 1 أغسطس 2025</li>
+      <li><strong>الهدف:</strong> تمكين المرأة، مواجهة التغيرات المناخية، بناء السلام</li>
+      <li><strong>الأنشطة:</strong> إنتاج 4 برامج بودكاست أسبوعية، بث عبر https://www.dream-podcast.net/</li>
+      <li><strong>التركيز:</strong> 50% على دور المرأة في السلام وحقوق الإنسان، دعم الفئات المهمشة</li>
+      <li><strong>التواصل:</strong> DreamFM44@gmail.com | 00967-771455399</li>
+    </ul>
   </div>
-</div>
 
-<!-- المحتوى العربي -->
-<div id="content-ar">
-  <section style="background:#E8F5E9;padding:40px;text-align:center">
-    <h2>إحصائياتنا / Our Impact</h2>
-    <div class="impact-grid">
-      <div class="impact-card"><h3>200+</h3><p>متابع</p></div>
-      <div class="impact-card"><h3>12</h3><p>حلقة</p></div>
-      <div class="impact-card"><h3>4</h3><p>برامج أسبوعية</p></div>
-      <div class="impact-card"><h3>237</h3><p>مستوى نشر</p></div>
-      <div class="impact-card"><h3>12,500</h3><p>مستمع محتمل</p></div>
-      <div class="impact-card"><h3>850K</h3><p>مشاهدة</p></div>
+  <div class="about">
+    <h2>من نحن</h2>
+    <p>منصة شبابية بجهود شبابية مستقلة تهدف لتنمية المجتمعات، رفع الوعي، تعزيز السلام، وتمكين المرأة.</p>
+  </div>
+
+  <div class="programs-grid">
+    <div class="program-card">
+      <img src="images/programs/grandma.jpg" alt="بودكاست مع جدتي">
+      <h3>بودكاست مع جدتي</h3>
+      <p>الإثنين | 8:00 ص | تصحيح الأمثال + الجفاف</p>
     </div>
-  </section>
-
-  <!-- خارطة البرامج (جدول + كروت) -->
-  <section style="padding:40px">
-    <h2 style="text-align:center">خارطة البرامج / Program Schedule</h2>
-    <table>
-      <tr><th>اليوم</th><th>البرنامج</th><th>الوقت</th><th>الموضوع</th></tr>
-      <tr><td>الإثنين</td><td>بودكاست مع جدتي</td><td>8:00 صباحاً</td><td>تصحيح الأمثال + تأثير الجفاف</td></tr>
-      <tr><td>الثلاثاء</td><td>تاء التأنيث</td><td>8:00 مساءً</td><td>تمكين اقتصادي</td></tr>
-      <tr><td>الأربعاء</td><td>بودكاست مع سعيد</td><td>7:00 مساءً</td><td>مكافحة الشائعات</td></tr>
-      <tr><td>الخميس</td><td>عالم حواء</td><td>9:00 مساءً</td><td>قصص نجاح نسائية</td></tr>
-    </table>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px;max-width:1000px;margin:auto">
-      <div class="program-card">[صورة البرنامج 1]</div>
-      <div class="program-card">[صورة البرنامج 2]</div>
-      <div class="program-card">[صورة البرنامج 3]</div>
-      <div class="program-card">[صورة البرنامج 4]</div>
+    <div class="program-card">
+      <img src="images/programs/taa.jpg" alt="تاء التأنيث">
+      <h3>تاء التأنيث</h3>
+      <p>الثلاثاء | 8:00 م | تمكين اقتصادي</p>
     </div>
-  </section>
-
-  <!-- البث المباشر (Zeno مدمج) -->
-  <section id="player-section" style="padding:40px;text-align:center;display:none;background:#F5F5F5">
-    <iframe src="https://zeno.fm/player/dream-podcast" frameborder="0" scrolling="no"></iframe>
-    <p style="font-size:0.9em"><a href="https://zeno.fm/" target="_blank">A Zeno.FM Station</a></p>
-  </section>
-
-  <!-- الوثيقة التعريفية الكاملة (من الصور المرفقة) -->
-  <section style="padding:40px;background:#FFF">
-    <h2 style="text-align:center">تقرير الاختبار الشامل - Dream Podcast</h2>
-    <p style="max-width:900px;margin:auto;text-align:justify">
-      <strong>معلومات الموقع:</strong><br>
-      الرابط الفعلي: https://tsetexco.manus.space<br>
-      تاريخ الاختبار: 1 أغسطس 2025<br>
-      UTC 17:03<br>
-      حالة الموقع: يعمل بشكل مثالي<br><br>
-
-      <strong>نتائج الاختبار:</strong><br>
-      شريط الأخبار المزدوج: يعمل<br>
-      الشريط الإنجليزي: يعمل بشكل مثالي<br>
-      الآداء: ممتاز<br>
-      المحتوى: أخبار تلقائية من منظمات عالمية<br>
-      الاستمرارية: لا توجد انقطاع أو اخطاء مفاجئ<br><br>
-
-      <strong>مختار إلى المفادر:</strong><br>
-      الموقع: في البداية كان طلب<br>
-      الوظيفة: يعمل مباشرة عند الضغط على الأيقونة<br>
-      التكامل: مدمج مع Zeno Radio بشكل مثالي<br>
-      عدد المستمعين: يتحدث تلقائياً (وصلة تقرير من 240 إلى 235)<br>
-      التصميم: احترافي وجذاب<br><br>
-
-      <strong>لوحة التحكم التفاعلية:</strong><br>
-      العنوان: تم تحديثه لإزالة "المنظمات الداعمة"<br>
-      البيانات الحية: 8 مؤشرات حية<br>
-      التدخلات والتعديل (رفعية ومباشرة للبرامج)<br>
-      قياس التأثير: اختبارات حقيقية<br><br>
-
-      <strong>البيانات المتاحة:</strong><br>
-      8 مؤشرات مناخية: جميعها تعمل وتحدث كل 3 ثوانٍ<br>
-      المصادر: موثوقة ومباشرة للمنظمات والمنظمة<br>
-      التصميم: بطاقات ملونة مع أيقونات واضحة<br>
-      الحالات: تحذيرات ملونة حسب الحالة<br><br>
-
-      <strong>الشركات والتمويل:</strong><br>
-      المحتوى: واقعي ومناسب لمرحلة البداية<br>
-      الإحصائيات:<br>
-      237 مستوى نشر (عدد حقيقي)<br>
-      8 برامج متخصصة (في الطريق وحقوق الإنسان)<br>
-      12,500 شخص وصول عبر الشبكات الاجتماعية<br>
-      3 تقارير أسبوعية منتظمة<br>
-      التصميم: بطاقات ملونة متميزة<br><br>
-
-      <strong>قياس التأثير:</strong><br>
-      المؤشرات:<br>
-      850K مشاهد مباشر (هدف مستقبلي)<br>
-      8 مشاريع منفذة (قيد التطوير)<br>
-      $2.5M دعم محتمل (محدد للوصول إليه)<br>
-      SMW طاقة متجددة<br>
-      أهداف التنمية المستدامة: من نسب الإنجاز<br>
-      خريطة التأثير الجغرافي: صورة توضيحية لليمن<br><br>
-
-      <strong>التصميم العام:</strong><br>
-      الألوان: تنسجي وجذاب بدل من الأخضر - أكثر جاذبية<br>
-      الشعار: Dream Podcast الأصلي مستخدم<br>
-      الخطوط: يعمل بشكل مثالي على الكمبيوتر<br>
-      الخطوط: واضحة ومقروءة<br>
-      الحركات: سلسة ومتدرجة<br><br>
-
-      <strong>الساعة والتاريخ:</strong><br>
-      التنسيق: أرقام إنجليزية كما طُلب<br><br>
-
-      <strong>مشروع إذاعة دريم بودكاست - معاً نحقق حلمك</strong><br>
-      في ظل الظروف الصعبة التي تمر بها اليمن، أصبح تعزيز حقوق الإنسان وبناء السلام من أهم التحديات... (الباقي من الوثيقة كاملاً هنا)
-    </p>
-  </section>
-
-  <!-- روابط التواصل + SDGs -->
-  <div style="text-align:center;padding:30px">
-    <h2>تابعونا / Follow Us</h2>
-    [أيقونة فيسبوك] [أيقونة إنستغرام] [أيقونة تويتر]
+    <div class="program-card">
+      <img src="images/programs/saeed.jpg" alt="بودكاست مع سعيد">
+      <h3>بودكاست مع سعيد</h3>
+      <p>الأربعاء | 7:00 م | مكافحة الشائعات</p>
+    </div>
+    <div class="program-card">
+      <img src="images/programs/hawa.jpg" alt="عالم حواء">
+      <h3>عالم حواء</h3>
+      <p>الخميس | 9:00 م | قصص نجاح نسائية</p>
+    </div>
   </div>
 
-  <div style="text-align:center;padding:30px">
-    <h2>أهداف التنمية المستدامة / SDGs</h2>
-    [أيقونة SDG 5] [أيقونة SDG 13] [أيقونة SDG 16]
-  </div>
-</div>
-
-<footer>
-  <p>© 2025 Dream Podcast - مبادرة إعلامية مستقلة | dreamfm44@gmail.com | +967 771455399</p>
-</footer>
-
-<script>
-function playLive() {
-  const player = document.getElementById('player-section');
-  player.style.display = 'block';
-  player.scrollIntoView({behavior: 'smooth'});
-}
-function showLang(lang) {
-  document.getElementById('content-ar').style.display = lang === 'ar' ? 'block' : 'none';
-  document.querySelectorAll('.lang-tabs button').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
-}
-// الساعة والتاريخ
-setInterval(() => {
-  const now = new Date();
-  document.getElementById('clock').innerText = now.toLocaleTimeString('en-US', {hour12: false});
-  document.getElementById('date').innerText = now.toLocaleDateString('en-US');
-}, 1000);
-</script>
-</body>
-</html>
+  <div id="live-player">
+    <iframe src="https://zeno.fm/player/dream-podcast" frameborder="0"></iframe>
+    <p><a href="https://zeno.fm/" target="_blank">A Zeno.FM Station
