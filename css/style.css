@@ -95,3 +95,11 @@ a.btn{ display:inline-block; }
 /* News grid */
 .news-grid{ display:grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap:18px; margin-top:18px; }
 .news-item img{ height:160px; object-fit:cover; border-radius:8px; }
+.impact {
+  background: #fff3e0;
+  padding: 30px;
+  border-radius: 16px;
+  max-width: 900px;
+  margin: 40px auto;
+  text-align: center;
+}
