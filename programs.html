@@ -63,23 +63,6 @@
       justify-content:center;
       padding:20px;
       font-size:14px;
-    }
-
-    /* مشغل الصوت */
-    .player { text-align:center; margin:30px 0; }
-    .player audio { width:100%; max-width:640px; border-radius:12px; }
-
-    /* موجات صوتية */
-    .waves { display:flex; justify-content:center; gap:4px; margin:12px 0; height:40px; }
-    .waves span {
-      display:inline-block; width:6px; background:#6A0DAD;
-      animation:wave 1s ease-in-out infinite; border-radius:4px;
-    }
-    .waves span:nth-child(1){ height:16px; animation-delay:0s; }
-    .waves span:nth-child(2){ height:24px; animation-delay:.15s; }
-    .waves span:nth-child(3){ height:36px; animation-delay:.3s; }
-    .waves span:nth-child(4){ height:24px; animation-delay:.45s; }
-    .waves span:nth-child(5){ height:16px; animation-delay:.6s; }
     @keyframes wave { 0%,100%{ transform:scaleY(.4);} 50%{ transform:scaleY(1);} }
   </style>
 </head>
@@ -151,33 +134,3 @@
     </div>
   </div>
 
-  <!-- مشغل الصوت -->
-  <div class="player" id="livePlayer" style="display:none;">
-    <audio id="audioPlayer" controls autoplay>
-      <source src="https://stream.zeno.fm/uapz9trqt3stv" type="audio/mpeg">
-      متصفحك لا يدعم تشغيل الصوت.
-    </audio>
-    <div class="waves" id="liveWaves" style="display:none;">
-      <span></span><span></span><span></span><span></span><span></span>
-    </div>
-  </div>
-
-  <script>
-    const audioPlayer = document.getElementById('audioPlayer');
-    const livePlayer = document.getElementById('livePlayer');
-    const liveWaves = document.getElementById('liveWaves');
-
-    document.querySelectorAll('.program-card').forEach(card => {
-      card.addEventListener('click', () => {
-        livePlayer.style.display = 'block';
-        audioPlayer.play();
-        liveWaves.style.display = 'flex';
-        livePlayer.scrollIntoView({behavior:'smooth'});
-      });
-    });
-
-    audioPlayer.addEventListener('pause', () => { liveWaves.style.display = 'none'; });
-    audioPlayer.addEventListener('ended', () => { liveWaves.style.display = 'none'; });
-  </script>
-</body>
-</html>
