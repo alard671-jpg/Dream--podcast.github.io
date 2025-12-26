@@ -4,131 +4,487 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>دريم بودكاست | Dream Podcast</title>
+  <meta name="description" content="رفع الوعي وتمكين الشباب والنساء في مواجهة التغيرات المناخية وبناء السلام المستدام عبر إعلام تفاعلي يصل إلى المجتمعات الريفية.">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    :root { --primary:#6A0DAD; --primary-dark:#4b0b89; --bg:#f9f6fc; --text:#222; --text-invert:#fff; }
-    body { font-family:'Tajawal', sans-serif; margin:0; background:var(--bg); color:var(--text); }
+    :root {
+      --primary: #6A0DAD;
+      --primary-700: #55108f;
+      --bg: #f9f6fc;
+      --card: #ffffff;
+      --muted: #ede7f6;
+      --text: #222;
+      --text-invert: #fff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      line-height: 1.8;
+    }
 
-    header { background:var(--primary); color:#fff; text-align:center; padding:40px 20px; }
-    header img.logo { width:100px; height:100px; border-radius:50%; border:4px solid #fff; }
-    header h1 { margin:10px 0; }
-    .lang-switch button { margin:0 5px; padding:6px 12px; border:none; border-radius:6px; cursor:pointer; }
+    /* Tickers */
+    .ticker {
+      position: fixed;
+      width: 100%;
+      color: #fff;
+      padding: 10px;
+      overflow: hidden;
+      z-index: 1000;
+      white-space: nowrap;
+      font-size: 14px;
+    }
+    .ticker-ar { top: 0; background: var(--primary); }
+    .ticker-en { top: 40px; background: #4b0082; }
+    .ticker-content {
+      display: inline-block;
+      animation-duration: 60s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+    /* As requested: Arabic scrolls LTR, English scrolls RTL */
+    .ticker-ar .ticker-content { animation-name: scroll-ltr; }
+    .ticker-en .ticker-content { animation-name: scroll-rtl; }
+    @keyframes scroll-ltr {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    @keyframes scroll-rtl {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
 
-    nav { background:var(--primary-dark); text-align:center; padding:10px; }
-    nav a { color:#fff; margin:0 10px; text-decoration:none; font-weight:bold; }
+    /* Header */
+    header {
+      background: var(--primary);
+      color: var(--text-invert);
+      text-align: center;
+      padding: 76px 20px 40px;
+    }
+    .topbar {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    .topbar a { color: #fff; text-decoration: none; opacity: 0.9; }
+    .logo {
+      width: 110px; height: 110px;
+      object-fit: contain;
+      border-radius: 50%;
+      border: 4px solid #fff;
+      background: rgba(255,255,255,0.08);
+    }
+    header h1 { margin: 12px 0 4px; font-size: 28px; }
+    header p { margin: 0 0 16px; opacity: 0.9; }
+    .btn {
+      display: inline-block;
+      background: #fff;
+      color: var(--primary);
+      padding: 12px 24px;
+      border-radius: 28px;
+      font-weight: 700;
+      text-decoration: none;
+      border: 0;
+      cursor: pointer;
+    }
+    .btn:hover { background: #f6f0ff; }
 
-    section { text-align:center; padding:40px 20px; }
+    /* Player modal */
+    .player-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .player-modal .panel {
+      background: #fff;
+      width: 100%;
+      max-width: 720px;
+      border-radius: 16px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+      overflow: hidden;
+    }
+    .panel-header {
+      background: var(--primary);
+      color: #fff;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .panel-header h3 { margin: 0; font-size: 18px; }
+    .close-btn {
+      background: transparent;
+      border: 0;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .panel-body iframe {
+      width: 100%;
+      height: 300px;
+      border: 0;
+    }
 
-    .live-block { display:flex; flex-direction:column; align-items:center; margin:20px 0; }
-    .live-btn { width:120px; height:120px; border-radius:50%; border:none; cursor:pointer;
-      background:var(--primary); display:flex; align-items:center; justify-content:center; }
-    .play-icon { width:0; height:0; border-left:30px solid #fff; border-top:18px solid transparent; border-bottom:18px solid transparent; }
-    .live-label { margin-top:8px; padding:6px 12px; border-radius:16px; background:#efe6f8; color:var(--primary); font-weight:bold; }
+    /* Sections */
+    .section {
+      max-width: 1100px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+    .why-dream {
+      background: var(--muted);
+      padding: 24px;
+      border-radius: 16px;
+      text-align: center;
+    }
 
-    .player { text-align:center; margin-top:10px; }
-    .player audio { width:100%; max-width:600px; }
+    /* Programs grid */
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .program-card {
+      background: var(--card);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+      transition: transform 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+    .program-card:hover { transform: translateY(-2px); }
+    .program-card img {
+      display: block;
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+    .program-card .content { padding: 14px 16px; }
+    .program-card h3 {
+      margin: 0 0 6px;
+      color: var(--primary-700);
+      font-size: 18px;
+    }
+    .program-card p {
+      margin: 0;
+      color: #444;
+      font-size: 14px;
+      line-height: 1.7;
+    }
 
-    .waves { display:none; justify-content:center; gap:4px; margin:12px 0; height:40px; }
-    .waves span { width:6px; background:var(--primary); animation:wave 1s ease-in-out infinite; border-radius:4px; }
-    .waves span:nth-child(1){ height:16px; animation-delay:0s; }
-    .waves span:nth-child(2){ height:24px; animation-delay:.15s; }
-    .waves span:nth-child(3){ height:36px; animation-delay:.3s; }
-    .waves span:nth-child(4){ height:24px; animation-delay:.45s; }
-    .waves span:nth-child(5){ height:16px; animation-delay:.6s; }
-    @keyframes wave { 0%,100%{ transform:scaleY(.4);} 50%{ transform:scaleY(1);} }
+    /* Footer */
+    footer {
+      background: var(--primary);
+      color: var(--text-invert);
+      text-align: center;
+      padding: 22px 16px;
+      margin-top: 36px;
+    }
+    footer a {
+      color: #fff;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    footer .contacts {
+      margin-top: 8px;
+      font-size: 14px;
+      opacity: 0.9;
+    }
 
-    footer { background:var(--primary); color:#fff; text-align:center; padding:20px; margin-top:40px; }
-    footer a { color:#fff; margin:0 10px; text-decoration:none; font-weight:bold; }
+    /* Responsive */
+    @media (max-width: 600px) {
+      header { padding: 60px 16px 28px; }
+      .logo { width: 96px; height: 96px; }
+      .topbar { justify-content: center; }
+    }
   </style>
 </head>
 <body>
 
-<header>
-  <img src="images/logo.png" alt="شعار دريم بودكاست" class="logo">
-  <h1 id="titleAr">دريم بودكاست</h1>
-  <h1 id="titleEn" style="display:none;">Dream Podcast</h1>
-  <p id="subtitleAr">منصة إعلامية صوتية للتغيير الإيجابي</p>
-  <p id="subtitleEn" style="display:none;">A podcast platform for positive change</p>
-  <div class="lang-switch">
-    <button onclick="setLang('ar')">العربية</button>
-    <button onclick="setLang('en')">English</button>
+  <!-- Tickers -->
+  <div class="ticker ticker-ar">
+    <div class="ticker-content" data-ar>🎙️ دريم بودكاست • تمكين المرأة • مواجهة المناخ • بناء السلام • 50% تركيز على المرأة</div>
   </div>
-</header>
-
-<nav>
-  <a href="index.html" id="navHomeAr">الرئيسية</a>
-  <a href="index.html" id="navHomeEn" style="display:none;">Home</a>
-  <a href="programs.html" id="navProgramsAr">برامجنا</a>
-  <a href="programs.html" id="navProgramsEn" style="display:none;">Programs</a>
-  <a href="#contact" id="navContactAr">تواصل معنا</a>
-  <a href="#contact" id="navContactEn" style="display:none;">Contact</a>
-</nav>
-
-<section>
-  <h2 id="liveAr">🎧 البث المباشر</h2>
-  <h2 id="liveEn" style="display:none;">🎧 Live Broadcast</h2>
-  <div class="live-block">
-    <button id="liveBtn" class="live-btn"><div class="play-icon"></div></button>
-    <div class="live-label" id="liveLabelAr">مباشر</div>
-    <div class="live-label" id="liveLabelEn" style="display:none;">Live</div>
+  <div class="ticker ticker-en">
+    <div class="ticker-content" data-en>🎙️ Dream Podcast • Empowering Women • Climate Action • Peacebuilding • 50% Focus on Women</div>
   </div>
-  <div class="waves" id="liveWaves"><span></span><span></span><span></span><span></span><span></span></div>
-  <div class="player" id="livePlayer" style="display:none;">
-    <audio id="audioPlayer" controls autoplay>
-      <source src="https://stream.zeno.fm/uapz9trqt3stv" type="audio/mpeg">
-    </audio>
+
+  <!-- Header -->
+  <header>
+    <div class="topbar">
+      <a href="#" id="langAr">العربية</a> | <a href="#" id="langEn">English</a>
+    </div>
+    <img src="images/logo.png" alt="شعار دريم بودكاست" class="logo">
+    <h1 data-ar>دريم بودكاست</h1>
+    <h1 data-en style="display:none;">Dream Podcast</h1>
+    <p data-ar>معاً نحقق حلمك</p>
+    <p data-en style="display:none;">Together, we achieve your dream</p>
+    <button class="btn" id="listenBtn" data-ar>استمع الآن</button>
+    <button class="btn" id="listenBtnEn" data-en style="display:none;">Listen Now</button>
+  </header>
+
+  <!-- Live player modal -->
+  <!-- زر البث المباشر -->
+<div class="live-block">
+  <button id="liveBtn" class="live-btn" aria-label="بث مباشر / Live">
+    <div class="play-icon"></div>
+  </button>
+
+  <!-- النص تحت الأيقونة -->
+  <div class="live-labels">
+    <span id="liveLabelAr" class="live-label">مباشر</span>
+    <span id="liveLabelEn" class="live-label" style="display:none;">Live</span>
   </div>
-</section>
+</div>
 
-<section>
-  <h2 id="aboutAr">عن دريم بودكاست</h2>
-  <h2 id="aboutEn" style="display:none;">About Dream Podcast</h2>
-  <p id="infoAr">منصة إعلامية مستقلة تهدف إلى تمكين المرأة والشباب والفئات المهمشة عبر برامج صوتية مبتكرة.</p>
-  <p id="infoEn" style="display:none;">An independent media platform empowering women, youth, and marginalized groups through innovative audio programs.</p>
-</section>
+<!-- موجات صوتية -->
+<div id="liveWaves" class="waves" style="display:none;">
+  <span></span><span></span><span></span><span></span><span></span>
+</div>
 
-<section>
-  <h2 id="programsAr">برامجنا</h2>
-  <h2 id="programsEn" style="display:none;">Our Programs</h2>
-  <p id="programsLinkAr">شاهد جميع البرامج <a href="programs.html">من هنا</a></p>
-  <p id="programsLinkEn" style="display:none;">See all programs <a href="programs.html">here</a></p>
-</section>
+<!-- مشغل الصوت -->
+<div id="livePlayer" class="player" style="display:none;">
+  <audio id="audioPlayer" controls autoplay>
+    <source src="https://stream.zeno.fm/uapz9trqt3stv" type="audio/mpeg">
+    متصفحك لا يدعم تشغيل الصوت / Your browser does not support audio.
+  </audio>
+</div>
 
-<section id="contact">
-  <h2 id="contactAr">تواصل معنا</h2>
-  <h2 id="contactEn" style="display:none;">Contact Us</h2>
-  <p id="contactInfoAr">للتواصل عبر البريد الإلكتروني: info@dreampodcast.com</p>
-  <p id="contactInfoEn" style="display:none;">For inquiries, email us at: info@dreampodcast.com</p>
-  <div>
-    <a href="https://www.facebook.com/share/15iyBtLaT1" target="_blank">Facebook</a>
-    <a href="https://www.instagram.com/dream.podcast.fm" target="_blank">Instagram</a>
-    <a href="https://twitter.com" target="_blank">Twitter/X</a>
-    <a href="https://youtube.com" target="_blank">YouTube</a>
-  </div>
-</section>
+<style>
+  :root { --primary:#6A0DAD; --primary-dark:#4b0b89; }
 
-<footer>
-  <p id="footerAr">© 2025 دريم بودكاست - جميع الحقوق محفوظة</p>
-  <p id="footerEn" style="display:none;">© 2025 Dream Podcast - All rights reserved</p>
-</footer>
+  .live-block {
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:8px; margin:20px 0;
+  }
+
+  /* زر دائري */
+  .live-btn {
+    width:120px; height:120px; border-radius:50%; border:none; cursor:pointer;
+    background:var(--primary); box-shadow:0 8px 20px rgba(0,0,0,0.25);
+    display:flex; align-items:center; justify-content:center;
+    transition:transform .2s ease, background .2s ease;
+  }
+  .live-btn:hover { background:var(--primary-dark); transform:scale(1.05); }
+
+  /* أيقونة مثلث التشغيل */
+  .play-icon {
+    width:0; height:0;
+    border-left:30px solid #fff;
+    border-top:18px solid transparent;
+    border-bottom:18px solid transparent;
+    margin-left:6px;
+  }
+
+  .live-labels { display:flex; align-items:center; gap:8px; }
+  .live-label {
+    display:inline-block; padding:6px 12px; border-radius:16px;
+    background:#efe6f8; color:var(--primary); font-weight:700; font-size:14px;
+  }
+
+  .player { text-align:center; margin-top:10px; }
+  .player audio { width:100%; max-width:640px; border-radius:12px; }
+
+  /* موجات صوتية */
+  .waves { display:flex; justify-content:center; gap:4px; margin:12px 0 2px; height:40px; }
+  .waves span {
+    display:inline-block; width:6px; background:var(--primary);
+    animation:wave 1s ease-in-out infinite; border-radius:4px;
+  }
+  .waves span:nth-child(1){ height:16px; animation-delay:0s; }
+  .waves span:nth-child(2){ height:24px; animation-delay:.15s; }
+  .waves span:nth-child(3){ height:36px; animation-delay:.3s; }
+  .waves span:nth-child(4){ height:24px; animation-delay:.45s; }
+  .waves span:nth-child(5){ height:16px; animation-delay:.6s; }
+
+  @keyframes wave { 0%,100%{ transform:scaleY(.4);} 50%{ transform:scaleY(1);} }
+
+  /* Responsive */
+  @media (max-width:600px){
+    .live-btn { width:96px; height:96px; }
+    .play-icon { border-left:24px solid #fff; border-top:14px solid transparent; border-bottom:14px solid transparent; }
+  }
+</style>
 
 <script>
   const liveBtn = document.getElementById('liveBtn');
-  const audioPlayer = document.getElementById('audioPlayer');
   const livePlayer = document.getElementById('livePlayer');
+  const audioPlayer = document.getElementById('audioPlayer');
   const liveWaves = document.getElementById('liveWaves');
 
   liveBtn.addEventListener('click', () => {
     livePlayer.style.display = 'block';
     liveWaves.style.display = 'flex';
-    audioPlayer.play();
+    audioPlayer.play().catch(()=>{});
+    livePlayer.scrollIntoView({ behavior:'smooth', block:'center' });
   });
+
+  audioPlayer.addEventListener('play', () => { liveWaves.style.display = 'flex'; });
   audioPlayer.addEventListener('pause', () => { liveWaves.style.display = 'none'; });
   audioPlayer.addEventListener('ended', () => { liveWaves.style.display = 'none'; });
 
+  // اللغة
   function setLang(lang){
     const ar = (lang === 'ar');
-    document.getElementById('titleAr').style.display = ar ? '' : 'none';
-    document.getElementById('titleEn').style.display = ar ? 'none' : '';
-    document.getElementById('subtitleAr').style.display = ar ? '' : 'none';
-    document.getElementById('subtitle
+    document.getElementById('liveLabelAr').style.display = ar ? '' : 'none';
+    document.getElementById('liveLabelEn').style.display = ar ? 'none' : '';
+    document.documentElement.lang = ar ? 'ar' : 'en';
+    document.documentElement.dir = ar ? 'rtl' : 'ltr';
+  }
+  setLang('ar'); // افتراضي عربي
+</script>
+  
+
+  <!-- Why Dream -->
+  <div class="section">
+    <div class="why-dream">
+      <h2 data-ar>لماذا دريم بودكاست؟</h2>
+      <h2 data-en style="display:none;">Why Dream Podcast?</h2>
+      <p data-ar>نرفع الوعي ونمكّن الشباب والنساء في مواجهة التغيرات المناخية وبناء السلام المستدام، عبر إعلام تفاعلي يصل إلى المجتمعات الريفية عبر FM، ويعزز الحوار المجتمعي ومكافحة الشائعات وبناء الشراكات.</p>
+      <p data-en style="display:none;">We raise awareness and empower youth and women to face climate change and build sustainable peace through interactive media reaching rural communities via FM, fostering dialogue, countering misinformation, and building partnerships.</p>
+    </div>
+  </div>
+
+  <!-- Programs -->>
+<div class="section">
+  <h2 data-ar style="margin:0 0 10px;">البرامج</h2>
+  <h2 data-en style="margin:0 0 10px; display:none;">Programs</h2>
+
+  <div class="programs-grid">
+    <div class="program-card">
+      <img src="images/programs/grandma.jpg" alt="بودكاست مع جدتي">
+      <div class="content">
+        <h3 data-ar>بودكاست مع جدتي</h3>
+        <h3 data-en style="display:none;">Podcast with Grandma</h3>
+        <p data-ar>برنامج درامي ساخر يطرح قضايا المرأة عبر حكايات الجدة اليومية، يناقش الأمثال المغلوطة ويدعم التمكين الاقتصادي.</p>
+        <p data-en style="display:none;">A satirical drama addressing women's issues through daily grandma stories, challenging harmful proverbs and supporting economic empowerment.</p>
+      </div>
+    </div>
+
+    <div class="program-card">
+      <img src="images/programs/greenroots.jpg" alt="جذور خضراء">
+      <div class="content">
+        <h3 data-ar>جذور خضراء</h3>
+        <h3 data-en style="display:none;">Green Roots</h3>
+        <p data-ar>قصة صوتية تُبرز أثر المناخ على الزراعة والأمن الغذائي وتناقش حلول التنمية المستدامة والممارسات الزراعية الذكية.</p>
+        <p data-en style="display:none;">An audio story on climate impact on agriculture and food security, discussing sustainable development and climate-smart practices.</p>
+      </div>
+    </div>
+
+    <div class="program-card">
+      <img src="images/programs/filter.jpg" alt="بودكاست فلتر">
+      <div class="content">
+        <h3 data-ar>بودكاست فلتر</h3>
+        <h3 data-en style="display:none;">Filter Podcast</h3>
+        <p data-ar>برنامج توعوي يحارب المعلومات المضللة ويعزّز ثقافة التحقق من الأخبار لبناء السلام والثقة المجتمعية.</p>
+        <p data-en style="display:none;">Educational program combating misinformation and promoting fact-checking to build peace and community trust.</p>
+      </div>
+    </div>
+
+    <div class="program-card">
+      <img src="images/programs/message.jpg" alt="بودكاست رسالة">
+      <div class="content">
+        <h3 data-ar>بودكاست رسالة</h3>
+        <h3 data-en style="display:none;">Message Podcast</h3>
+        <p data-ar>برنامج إنساني يُبرز قصص النجاح والتحديات لدى ذوي الإعاقة والفئات المهمشة للدعم النفسي والتمكين المعنوي.</p>
+        <p data-en style="display:none;">A human-centered program highlighting success and challenges of people with disabilities and marginalized groups for psychosocial support.</p>
+      </div>
+    </div>
+
+    <div class="program-card">
+      <img src="images/programs/bridges.jpg" alt="بودكاست جسور">
+      <div class="content">
+        <h3 data-ar>بودكاست جسور</h3>
+        <h3 data-en style="display:none;">Bridges Podcast</h3>
+        <p data-ar>حوارات حول السلام في الحياة اليومية، التعايش، حل النزاعات، ومبادرات التعافي المجتمعي بعد الحرب.</p>
+        <p data-en style="display:none;">Dialogues on everyday peace, coexistence, conflict resolution, and community recovery initiatives after war.</p>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <!-- Footer -->
+  <footer>
+    <p data-ar>البريد الإلكتروني: <a href="mailto:dreamfm44@gmail.com">dreamfm44@gmail.com</a></p>
+    <p data-en style="display:none;">Email: <a href="mailto:dreamfm44@gmail.com">dreamfm44@gmail.com</a></p>
+
+    <p data-ar>الهاتف: 00967771455399</p>
+    <p data-en style="display:none;">Phone: +967 771 455 399</p>
+
+    <p>
+      <a data-ar href="https://www.facebook.com/share/15iyBtLaT1" target="_blank" rel="noopener">فيسبوك</a>
+      <a data-en href="https://www.facebook.com/share/15iyBtLaT1" target="_blank" rel="noopener" style="display:none;">Facebook</a>
+      |
+      <a data-ar href="https://www.instagram.com/dream.podcast.fm" target="_blank" rel="noopener">إنستغرام</a>
+      <a data-en href="https://www.instagram.com/dream.podcast.fm" target="_blank" rel="noopener" style="display:none;">Instagram</a>
+    </p>
+
+    <div class="contacts" data-ar>© جميع الحقوق محفوظة لدريم بودكاست</div>
+    <div class="contacts" data-en style="display:none;">© All rights reserved to Dream Podcast</div>
+  </footer>
+
+  <!-- Language toggle + player controls -->
+  <script>
+    const listenBtnAr = document.getElementById('listenBtn');
+    const listenBtnEn = document.getElementById('listenBtnEn');
+    const playerModal = document.getElementById('playerModal');
+    const closePlayer = document.getElementById('closePlayer');
+
+    const arEls = document.querySelectorAll('[data-ar]');
+    const enEls = document.querySelectorAll('[data-en]');
+    const langAr = document.getElementById('langAr');
+    const langEn = document.getElementById('langEn');
+
+    function setLang(lang) {
+      const isAr = lang === 'ar';
+      document.documentElement.lang = isAr ? 'ar' : 'en';
+      document.documentElement.dir = isAr ? 'rtl' : 'ltr';
+      arEls.forEach(el => el.style.display = isAr ? '' : 'none');
+      enEls.forEach(el => el.style.display = isAr ? 'none' : '');
+    }
+
+    // Read ?lang from URL
+    const params = new URLSearchParams(window.location.search);
+    const initLang = params.get('lang') === 'en' ? 'en' : 'ar';
+    setLang(initLang);
+
+    langAr.addEventListener('click', (e) => {
+      e.preventDefault();
+      setLang('ar');
+      const url = new URL(window.location);
+      url.searchParams.set('lang', 'ar');
+      window.history.replaceState({}, '', url);
+    });
+    langEn.addEventListener('click', (e) => {
+      e.preventDefault();
+      setLang('en');
+      const url = new URL(window.location);
+      url.searchParams.set('lang', 'en');
+      window.history.replaceState({}, '', url);
+    });
+
+    // Player open/close
+    function openPlayer() { playerModal.style.display = 'flex'; playerModal.setAttribute('aria-hidden', 'false'); }
+    function closePlayerModal() { playerModal.style.display = 'none'; playerModal.setAttribute('aria-hidden', 'true'); }
+
+    listenBtnAr.addEventListener('click', openPlayer);
+    listenBtnEn.addEventListener('click', openPlayer);
+    closePlayer.addEventListener('click', closePlayerModal);
+    playerModal.addEventListener('click', (e) => { if (e.target === playerModal) closePlayerModal(); });
+  </script>
+</body>
+</html>
